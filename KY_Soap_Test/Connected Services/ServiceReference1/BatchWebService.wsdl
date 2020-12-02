@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://HP.HPES.MED.Interfaces/Batch" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BatchWebService" targetNamespace="http://HP.HPES.MED.Interfaces/Batch" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="wsHttpBinding_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:EndorsingSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:SecureConversationToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:BootstrapPolicy>
+                  <wsp:Policy>
+                    <sp:SignedParts>
+                      <sp:Body />
+                      <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+                    </sp:SignedParts>
+                    <sp:EncryptedParts>
+                      <sp:Body />
+                    </sp:EncryptedParts>
+                    <sp:TransportBinding>
+                      <wsp:Policy>
+                        <sp:TransportToken>
+                          <wsp:Policy>
+                            <sp:HttpsToken RequireClientCertificate="false" />
+                          </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                          <wsp:Policy>
+                            <sp:Basic256 />
+                          </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                          <wsp:Policy>
+                            <sp:Strict />
+                          </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp />
+                      </wsp:Policy>
+                    </sp:TransportBinding>
+                    <sp:SignedSupportingTokens>
+                      <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                          <wsp:Policy>
+                            <sp:WssUsernameToken10 />
+                          </wsp:Policy>
+                        </sp:UsernameToken>
+                      </wsp:Policy>
+                    </sp:SignedSupportingTokens>
+                    <sp:Wss11>
+                      <wsp:Policy>
+                        <sp:MustSupportRefKeyIdentifier />
+                        <sp:MustSupportRefIssuerSerial />
+                        <sp:MustSupportRefThumbprint />
+                        <sp:MustSupportRefEncryptedKey />
+                      </wsp:Policy>
+                    </sp:Wss11>
+                    <sp:Trust10>
+                      <wsp:Policy>
+                        <sp:MustSupportIssuedTokens />
+                        <sp:RequireClientEntropy />
+                        <sp:RequireServerEntropy />
+                      </wsp:Policy>
+                    </sp:Trust10>
+                  </wsp:Policy>
+                </sp:BootstrapPolicy>
+              </wsp:Policy>
+            </sp:SecureConversationToken>
+            <sp:SignedParts>
+              <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+            </sp:SignedParts>
+          </wsp:Policy>
+        </sp:EndorsingSupportingTokens>
+        <sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:MustSupportRefKeyIdentifier />
+            <sp:MustSupportRefIssuerSerial />
+            <sp:MustSupportRefThumbprint />
+            <sp:MustSupportRefEncryptedKey />
+          </wsp:Policy>
+        </sp:Wss11>
+        <sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
+          </wsp:Policy>
+        </sp:Trust10>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://HP.HPES.MED.Interfaces/Batch">
+      <xsd:element name="GetDownloadFilesByPayloadID">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="PayloadID" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetDownloadFilesByPayloadIDResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetDownloadFilesByPayloadIDResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetDownloadFilesByTPID">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetDownloadFilesByTPIDResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetDownloadFilesByTPIDResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetDownloadFilesByUserID">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetDownloadFilesByUserIDResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="GetDownloadFilesByUserIDResult" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd">
+      <xsd:element xmlns:q1="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchSubmission" type="q1:CAQHRequestField" />
+      <xsd:complexType name="CAQHRequestField">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="PayloadType" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ProcessingMode" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="PayloadID" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="PayloadLength" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="TimeStamp" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="SenderID" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ReceiverID" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="CORERuleVersion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="CheckSum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Payload" type="xsd:base64Binary" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="UserName" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Password" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:q2="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchSubmissionResponse" type="q2:CAQHResponseField" />
+      <xsd:complexType name="CAQHResponseField">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="PayloadType" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ProcessingMode" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="PayloadID" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="PayloadLength" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="TimeStamp" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="SenderID" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ReceiverID" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="CORERuleVersion" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="CheckSum" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="Payload" type="xsd:base64Binary" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:q3="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchResultsRetrievalRequest" type="q3:CAQHRequestField" />
+      <xsd:element xmlns:q4="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchResultsRetrievalResponse" type="q4:CAQHResponseField" />
+      <xsd:element xmlns:q5="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchSubmissionAckRetrievalRequest" type="q5:CAQHRequestField" />
+      <xsd:element xmlns:q6="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchSubmissionAckRetrievalResponse" type="q6:CAQHResponseField" />
+    </xsd:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="BatchSubmitTransactionRequest">
+    <wsdl:part xmlns:q7="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchSubmission" element="q7:COREEnvelopeBatchSubmission" />
+  </wsdl:message>
+  <wsdl:message name="BatchSubmitTransactionResponse">
+    <wsdl:part xmlns:q8="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchSubmissionResponse" element="q8:COREEnvelopeBatchSubmissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="BatchResultsRetrievalTransactionRequest">
+    <wsdl:part xmlns:q9="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchResultsRetrievalRequest" element="q9:COREEnvelopeBatchResultsRetrievalRequest" />
+  </wsdl:message>
+  <wsdl:message name="BatchResultsRetrievalTransactionResponse">
+    <wsdl:part xmlns:q10="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchResultsRetrievalResponse" element="q10:COREEnvelopeBatchResultsRetrievalResponse" />
+  </wsdl:message>
+  <wsdl:message name="BatchSubmitAckRetrievalTransactionRequest">
+    <wsdl:part xmlns:q11="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchSubmissionAckRetrievalRequest" element="q11:COREEnvelopeBatchSubmissionAckRetrievalRequest" />
+  </wsdl:message>
+  <wsdl:message name="BatchSubmitAckRetrievalTransactionResponse">
+    <wsdl:part xmlns:q12="http://www.caqh.org/SOAP/WSDL/CORERule2.2.0.xsd" name="COREEnvelopeBatchSubmissionAckRetrievalResponse" element="q12:COREEnvelopeBatchSubmissionAckRetrievalResponse" />
+  </wsdl:message>
+  <wsdl:message name="BatchWebServiceInterface_GetDownloadFilesByPayloadID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDownloadFilesByPayloadID" />
+  </wsdl:message>
+  <wsdl:message name="BatchWebServiceInterface_GetDownloadFilesByPayloadID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDownloadFilesByPayloadIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="BatchWebServiceInterface_GetDownloadFilesByTPID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDownloadFilesByTPID" />
+  </wsdl:message>
+  <wsdl:message name="BatchWebServiceInterface_GetDownloadFilesByTPID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDownloadFilesByTPIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="BatchWebServiceInterface_GetDownloadFilesByUserID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDownloadFilesByUserID" />
+  </wsdl:message>
+  <wsdl:message name="BatchWebServiceInterface_GetDownloadFilesByUserID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDownloadFilesByUserIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BatchWebServiceInterface">
+    <wsdl:operation name="SubmitFile">
+      <wsdl:input wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/SubmitFile" name="BatchSubmitTransactionRequest" message="tns:BatchSubmitTransactionRequest" />
+      <wsdl:output wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/SubmitFileResponse" name="BatchSubmitTransactionResponse" message="tns:BatchSubmitTransactionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <wsdl:input wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/DownloadFile" name="BatchResultsRetrievalTransactionRequest" message="tns:BatchResultsRetrievalTransactionRequest" />
+      <wsdl:output wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/DownloadFileResponse" name="BatchResultsRetrievalTransactionResponse" message="tns:BatchResultsRetrievalTransactionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadAckFile">
+      <wsdl:input wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/DownloadAckFile" name="BatchSubmitAckRetrievalTransactionRequest" message="tns:BatchSubmitAckRetrievalTransactionRequest" />
+      <wsdl:output wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/DownloadAckFileResponse" name="BatchSubmitAckRetrievalTransactionResponse" message="tns:BatchSubmitAckRetrievalTransactionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadFilesByPayloadID">
+      <wsdl:input wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/GetDownloadFilesByPayloadID" message="tns:BatchWebServiceInterface_GetDownloadFilesByPayloadID_InputMessage" />
+      <wsdl:output wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/GetDownloadFilesByPayloadIDResponse" message="tns:BatchWebServiceInterface_GetDownloadFilesByPayloadID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadFilesByTPID">
+      <wsdl:input wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/GetDownloadFilesByTPID" message="tns:BatchWebServiceInterface_GetDownloadFilesByTPID_InputMessage" />
+      <wsdl:output wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/GetDownloadFilesByTPIDResponse" message="tns:BatchWebServiceInterface_GetDownloadFilesByTPID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadFilesByUserID">
+      <wsdl:input wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/GetDownloadFilesByUserID" message="tns:BatchWebServiceInterface_GetDownloadFilesByUserID_InputMessage" />
+      <wsdl:output wsaw:Action="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/GetDownloadFilesByUserIDResponse" message="tns:BatchWebServiceInterface_GetDownloadFilesByUserID_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wsHttpBinding" type="tns:BatchWebServiceInterface">
+    <wsp:PolicyReference URI="#wsHttpBinding_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SubmitFile">
+      <soap12:operation soapAction="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/SubmitFile" style="document" />
+      <wsdl:input name="BatchSubmitTransactionRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BatchSubmitTransactionResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <soap12:operation soapAction="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/DownloadFile" style="document" />
+      <wsdl:input name="BatchResultsRetrievalTransactionRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BatchResultsRetrievalTransactionResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadAckFile">
+      <soap12:operation soapAction="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/DownloadAckFile" style="document" />
+      <wsdl:input name="BatchSubmitAckRetrievalTransactionRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BatchSubmitAckRetrievalTransactionResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadFilesByPayloadID">
+      <soap12:operation soapAction="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/GetDownloadFilesByPayloadID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadFilesByTPID">
+      <soap12:operation soapAction="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/GetDownloadFilesByTPID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadFilesByUserID">
+      <soap12:operation soapAction="http://HP.HPES.MED.Interfaces/Batch/BatchWebServiceInterface/GetDownloadFilesByUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BatchWebService">
+    <wsdl:port name="wsHttpBinding" binding="tns:wsHttpBinding">
+      <soap12:address location="https://testservices.kymmis.com/BatchUploadDownloadServiceApp/BatchService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://testservices.kymmis.com/BatchUploadDownloadServiceApp/BatchService.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
